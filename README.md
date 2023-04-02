@@ -1,12 +1,29 @@
+## Technologies/Tools Used
+
+Java 11
+Intellij Idea for Development
+Maven Build Tool
+Lombok Libraries
+
+## Setup & Run Instructions
+
+mvn clean install - it will build application
+
+mvn spring-boot:run - it will run the application
+
+## Future Code Improvements
+
+Can use JDK 17 and other versions and its features to replace if conditions using Optional.ofNullable().ifPresentOrElse() etc
+
 # Harry-Kart
 ## Description
-Harry-Kart in a special kind of harryKartVO racing.
+Harry-Kart in a special kind of horse racing.
 
 The horses participating have a base speed, they can run with that speed indefinitely.
-The track is a 1000 meters loop and is divided in lanes, each harryKartVO runs on a lane and every lane has the same length.   
+The track is a 1000 meters loop and is divided in lanes, each horse runs on a lane and every lane has the same length.   
 The horses run the first loop at their base speed but at the end of each loop they find a power-up or power-down.
 
-The power-ups/downs are numbers, negative or positive, representing how much the harryKartVO speeds up or slows down.
+The power-ups/downs are numbers, negative or positive, representing how much the horse speeds up or slows down.
 
 Your task is to compute the top 3 ranking.
 
@@ -113,9 +130,9 @@ The output must be a json document of this form:
 ```json
 {
    "ranking": [
-      {"position": 1, "harryKartVO": "TIMETOBELUCKY"},
-      {"position": 2, "harryKartVO": "HERCULES BOKO"},
-      {"position": 3, "harryKartVO": "CARGO DOOR"}
+      {"position": 1, "horse": "TIMETOBELUCKY"},
+      {"position": 2, "horse": "HERCULES BOKO"},
+      {"position": 3, "horse": "CARGO DOOR"}
    ]
 }
 ```
