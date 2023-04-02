@@ -2,7 +2,8 @@
 
 Java 11,
 Intellij Idea for Development,
-Maven Build Tool and 
+Maven Build Tool ,
+JAXB,Swagger Libraries,Springboot with REST API's and 
 Lombok Libraries
 
 ## Setup & Run Instructions
