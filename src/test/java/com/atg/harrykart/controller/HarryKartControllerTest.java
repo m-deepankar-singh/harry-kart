@@ -3,6 +3,7 @@ package com.atg.harrykart.controller;
 import com.atg.harrykart.HarryKartApplication;
 import com.atg.harrykart.exception.InvalidRequestException;
 import com.atg.harrykart.model.HarryKartResponse;
+import com.atg.harrykart.model.WinningHorsesResponse;
 import com.atg.harrykart.service.HarryKartService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.atg.harrykart.service.Constants.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = HarryKartApplication.class)
@@ -57,7 +60,9 @@ public class HarryKartControllerTest {
         threeTopHorsesWithRanks.add(new HarryKartResponse(1, TIMETOBELUCKY));
         threeTopHorsesWithRanks.add(new HarryKartResponse(2, HERCULES_BOKO));
         threeTopHorsesWithRanks.add(new HarryKartResponse(3, CARGO_DOOR));
-        Mockito.when(harryKartService.getWinningHorses(Mockito.any())).thenReturn(threeTopHorsesWithRanks);
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(threeTopHorsesWithRanks);
+        Mockito.when(harryKartService.getWinningHorses(Mockito.any())).thenReturn(winningHorsesRankings);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL).contentType(MediaType.APPLICATION_XML).content(getJsonString(threeTopHorsesWithRanks))).andReturn();
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
         Assert.assertEquals(getHarryKartResponsesForFirstInput(), mvcResult.getResponse().getContentAsString());
@@ -83,7 +88,9 @@ public class HarryKartControllerTest {
         threeTopHorsesWithRanks.add(new HarryKartResponse(1, WAIKIKI_SILVIO));
         threeTopHorsesWithRanks.add(new HarryKartResponse(2, TIMETOBELUCKY));
         threeTopHorsesWithRanks.add(new HarryKartResponse(3, HERCULES_BOKO));
-        Mockito.when(harryKartService.getWinningHorses(Mockito.any())).thenReturn(threeTopHorsesWithRanks);
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(threeTopHorsesWithRanks);
+        Mockito.when(harryKartService.getWinningHorses(Mockito.any())).thenReturn(winningHorsesRankings);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL).contentType(MediaType.APPLICATION_XML).content(getJsonString(threeTopHorsesWithRanks))).andReturn();
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
         Assert.assertEquals(getHarryKartResponsesForSecondInput(), mvcResult.getResponse().getContentAsString());
@@ -95,7 +102,9 @@ public class HarryKartControllerTest {
         threeTopHorsesWithRanks.add(new HarryKartResponse(1, HERCULES_BOKO));
         threeTopHorsesWithRanks.add(new HarryKartResponse(2, TIMETOBELUCKY));
         threeTopHorsesWithRanks.add(new HarryKartResponse(3, WAIKIKI_SILVIO));
-        Mockito.when(harryKartService.getWinningHorses(Mockito.any())).thenReturn(threeTopHorsesWithRanks);
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(threeTopHorsesWithRanks);
+        Mockito.when(harryKartService.getWinningHorses(Mockito.any())).thenReturn(winningHorsesRankings);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL).contentType(MediaType.APPLICATION_XML).content(getJsonString(threeTopHorsesWithRanks))).andReturn();
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
         Assert.assertEquals(getHarryKartResponsesForThirdInput(), mvcResult.getResponse().getContentAsString());
@@ -109,27 +118,33 @@ public class HarryKartControllerTest {
     }
 
     private String getHarryKartResponsesForThirdInput() throws JsonProcessingException {
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
         List<HarryKartResponse> threeTopHorsesWithRanks = new ArrayList<>();
         threeTopHorsesWithRanks.add(new HarryKartResponse(1, HERCULES_BOKO));
         threeTopHorsesWithRanks.add(new HarryKartResponse(2, TIMETOBELUCKY));
         threeTopHorsesWithRanks.add(new HarryKartResponse(3, WAIKIKI_SILVIO));
-        return new ObjectMapper().writeValueAsString(threeTopHorsesWithRanks);
+        winningHorsesRankings.setRanking(threeTopHorsesWithRanks);
+        return new ObjectMapper().writeValueAsString(winningHorsesRankings);
     }
 
     private String getHarryKartResponsesForSecondInput() throws JsonProcessingException {
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
         List<HarryKartResponse> threeTopHorsesWithRanks = new ArrayList<>();
         threeTopHorsesWithRanks.add(new HarryKartResponse(1, WAIKIKI_SILVIO));
         threeTopHorsesWithRanks.add(new HarryKartResponse(2, TIMETOBELUCKY));
         threeTopHorsesWithRanks.add(new HarryKartResponse(3, HERCULES_BOKO));
-        return new ObjectMapper().writeValueAsString(threeTopHorsesWithRanks);
+        winningHorsesRankings.setRanking(threeTopHorsesWithRanks);
+        return new ObjectMapper().writeValueAsString(winningHorsesRankings);
     }
 
     private String getHarryKartResponsesForFirstInput() throws JsonProcessingException {
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
         List<HarryKartResponse> threeTopHorsesWithRanks = new ArrayList<>();
         threeTopHorsesWithRanks.add(new HarryKartResponse(1, TIMETOBELUCKY));
         threeTopHorsesWithRanks.add(new HarryKartResponse(2, HERCULES_BOKO));
         threeTopHorsesWithRanks.add(new HarryKartResponse(3, CARGO_DOOR));
-        return new ObjectMapper().writeValueAsString(threeTopHorsesWithRanks);
+        winningHorsesRankings.setRanking(threeTopHorsesWithRanks);
+        return new ObjectMapper().writeValueAsString(winningHorsesRankings);
 
     }
 

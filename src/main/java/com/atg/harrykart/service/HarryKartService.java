@@ -2,6 +2,7 @@ package com.atg.harrykart.service;
 
 import com.atg.harrykart.model.HarryKartResponse;
 import com.atg.harrykart.model.HarryKartVO;
+import com.atg.harrykart.model.WinningHorsesResponse;
 import com.atg.harrykart.request.Lane;
 import com.atg.harrykart.exception.InvalidRequestException;
 import com.atg.harrykart.request.HarryKart;
@@ -26,7 +27,7 @@ public class HarryKartService {
      * Returns list of the top winning horses with its names and rankings.
      * @return  List<HarryKartResponse> Returns Top Winning Horses.
      */
-    public List<HarryKartResponse> getWinningHorses(final String harryKartStr) {
+    public WinningHorsesResponse getWinningHorses(final String harryKartStr) {
         if(Objects.isNull(harryKartStr)|| harryKartStr.isEmpty()){
             throw new InvalidRequestException("Invalid Request Data ");
         }
@@ -37,13 +38,15 @@ public class HarryKartService {
         List<HarryKartVO> harryKartVOS = getHarryKartVOS(harryKart);
         List<HarryKartVO> winningHorses = harryKartVOS.stream()
                 .sorted(Comparator.comparingDouble(HarryKartVO::getTotalTime))
-                .collect(Collectors.toList()).subList(0, 3);   //only when 2 tests.
+                .collect(Collectors.toList()).subList(0, 3);
         List<HarryKartResponse> responses = new LinkedList<>();
         int idx =0;
         for(HarryKartVO harryKartVO : winningHorses) {
             responses.add(new HarryKartResponse(++idx,harryKartVO.getHorseName()));
         }
-        return responses;
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(responses);
+        return winningHorsesRankings ;
     }
 
     private static List<HarryKartVO> getHarryKartVOS(HarryKart harryKart) {

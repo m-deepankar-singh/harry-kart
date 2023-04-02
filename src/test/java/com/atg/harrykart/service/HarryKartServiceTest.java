@@ -3,6 +3,7 @@ package com.atg.harrykart.service;
 
 
 import com.atg.harrykart.model.HarryKartResponse;
+import com.atg.harrykart.model.WinningHorsesResponse;
 import lombok.SneakyThrows;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,9 +43,11 @@ public class HarryKartServiceTest {
         harryKartResponseList.add(new HarryKartResponse(1, TIMETOBELUCKY));
         harryKartResponseList.add(new HarryKartResponse(2, HERCULES_BOKO));
         harryKartResponseList.add(new HarryKartResponse(3, CARGO_DOOR));
-        when(harryKartService.getWinningHorses(xmlAsString)).thenReturn(harryKartResponseList);
-        List<HarryKartResponse> response = harryKartService.getWinningHorses(xmlAsString);
-        assertEquals(3, response.size());
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(harryKartResponseList);
+        when(harryKartService.getWinningHorses(xmlAsString)).thenReturn(winningHorsesRankings);
+        WinningHorsesResponse response = harryKartService.getWinningHorses(xmlAsString);
+        assertEquals(3, response.getRanking().size());
     }
 
     @Test
@@ -55,9 +58,11 @@ public class HarryKartServiceTest {
         harryKartResponseList.add(new HarryKartResponse(1, WAIKIKI_SILVIO));
         harryKartResponseList.add(new HarryKartResponse(2, TIMETOBELUCKY));
         harryKartResponseList.add(new HarryKartResponse(3, HERCULES_BOKO));
-        when(harryKartService.getWinningHorses(xmlAsString)).thenReturn(harryKartResponseList);
-        List<HarryKartResponse> response = harryKartService.getWinningHorses(xmlAsString);
-        assertEquals(3, response.size());
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(harryKartResponseList);
+        when(harryKartService.getWinningHorses(xmlAsString)).thenReturn(winningHorsesRankings);
+        WinningHorsesResponse response = harryKartService.getWinningHorses(xmlAsString);
+        assertEquals(3, response.getRanking().size());
     }
 
 
@@ -69,9 +74,11 @@ public class HarryKartServiceTest {
         harryKartResponseList.add(new HarryKartResponse(1, HERCULES_BOKO));
         harryKartResponseList.add(new HarryKartResponse(2, TIMETOBELUCKY));
         harryKartResponseList.add(new HarryKartResponse(3, WAIKIKI_SILVIO));
-        when(harryKartService.getWinningHorses(xmlAsString)).thenReturn(harryKartResponseList);
-        List<HarryKartResponse> response = harryKartService.getWinningHorses(xmlAsString);
-        assertEquals(3, response.size());
+        WinningHorsesResponse winningHorsesRankings = new WinningHorsesResponse();
+        winningHorsesRankings.setRanking(harryKartResponseList);
+        when(harryKartService.getWinningHorses(xmlAsString)).thenReturn(winningHorsesRankings);
+        WinningHorsesResponse response = harryKartService.getWinningHorses(xmlAsString);
+        assertEquals(3, response.getRanking().size());
     }
 
 
