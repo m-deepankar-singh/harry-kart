@@ -1,8 +1,8 @@
 ## Technologies/Tools Used
 
-Java 11
-Intellij Idea for Development
-Maven Build Tool
+Java 11,
+Intellij Idea for Development,
+Maven Build Tool and 
 Lombok Libraries
 
 ## Setup & Run Instructions
