@@ -141,4 +141,17 @@ The output must be a json document of this form:
 }
 ```
 
+## Code Review Comments in Progress 
+
+The code produces the expected result in each given scenario. It has some unit tests for code coverage. But, there are few things which could be improved in this code.
+      1. One of the main point was taking input XML as a string and then parsing it manually. Springboot provides means to convert to an Object.
+      2. The code test was provided with an input.xsd file which includes some information about validations that could be performed on the requests. Right       now only validation is for null or empty for the input string.
+      3. Also, input.xsd could be used to generate the POJO’s using a maven plugin instead of creating them manually.
+      4. When a request is invalid then usually a bad request is sent back as a response, instead of client exception.
+      5. Stream API’s since Java 8 are nicer and makes code more readable. Would suggest to use them instead of for loops.
+      6. Once a request object HarryKart is available, it would be better to use that for calculation and store the outcome in a separate POJO instead of         creating another HarryKartVO. It would reduce lot of complexity in the code.
+      7. Did not understand the use of MockitoAnnotations.openMocks in HarryKartServiceTest. I don’t think it is required and also it is a good practice to       close them when the tests are finished or use try-with-resources statement.
+      HarryKartService is injected using Field injection which is not recommended.
+
+
 
